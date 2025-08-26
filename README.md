@@ -1,10 +1,10 @@
 ---
 title: Smart Interview Assistant
-emoji: 📈
-colorFrom: red
-colorTo: indigo
+emoji: 🧠
+colorFrom: indigo
+colorTo: blue
 sdk: docker
-pinned: false
+app_file: app.py
 ---
 
-Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
+A GenAI-powered assistant that helps users prepare for technical interviews using LangChain, RAG, and Flask.
