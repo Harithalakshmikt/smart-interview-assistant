@@ -9,3 +9,8 @@ class Query(BaseModel):
 @app.post("/ask")
 async def ask(query: Query):
     return {"response": f"You asked: {query.query}"}
+
+@app.get("/")
+def home():
+    return {"message": "Welcome to the API!"}
+
