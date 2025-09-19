@@ -1,20 +1,24 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
+import gradio as gr
 from transformers import pipeline
 
-app = FastAPI()
+# Load the public LLM (Gemma 2B Instruction-tuned)
+generator = pipeline("text-generation", model="google/gemma-2b-it")
 
-# Load a small Hugging Face model
-generator = pipeline("text-generation", model="google/gemma-2b-it")  # lightweight and free
+# Define the assistant logic
+def interview_assistant(prompt):
+    response = generator(prompt, max_length=200, do_sample=True)[0]["generated_text"]
+    return response.strip()
 
-class Query(BaseModel):
-    query: str
+# Build Gradio UI
+demo = gr.Interface(
+    fn=interview_assistant,
+    inputs=gr.Textbox(lines=4, placeholder="Ask a technical question or paste your answer for feedback..."),
+    outputs="text",
+    title="🧠 Smart Interview Assistant",
+    description="Powered by Gemma-2B. Ask mock interview questions or get feedback on your answers.",
+    theme="default"
+)
 
-@app.post("/ask")
-async def ask(query: Query):
-    result = generator(query.query, max_length=200, do_sample=True)[0]["generated_text"]
-    return {"response": result}
-
-@app.get("/")
-def home():
-    return {"message": "Welcome to the Smart Interview Assistant API!"}
+# Launch the app
+if __name__ == "__main__":
+    demo.launch()
