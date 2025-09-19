@@ -1,6 +1,8 @@
 fastapi
 uvicorn[standard]
 langchain
-openai
 faiss-cpu
 python-dotenv
+torch
+transformers
+gradio
