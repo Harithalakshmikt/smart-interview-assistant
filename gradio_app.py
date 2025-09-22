@@ -1,7 +1,7 @@
 import gradio as gr
 from transformers import pipeline
 
-generator = pipeline("text-generation", model="google/flan-t5-base")
+generator = pipeline("text2text-generation", model="google/flan-t5-base")
 
 def interview_assistant(prompt):
     result = generator(prompt, max_length=200, do_sample=True)[0]["generated_text"]
