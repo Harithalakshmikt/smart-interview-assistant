@@ -2,7 +2,7 @@ import gradio as gr
 from transformers import pipeline
 
 # Load public LLM from Hugging Face
-generator = pipeline("text-generation", model="mistralai/Mistral-7B-Instruct-v0.1")
+generator = pipeline("text-generation", model="tiiuae/falcon-7b-instruct")
 
 # Define assistant logic
 def interview_assistant(prompt):
