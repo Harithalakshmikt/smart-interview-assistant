@@ -1,24 +1,12 @@
 import gradio as gr
-from transformers import pipeline
-
-generator = pipeline("text2text-generation", model="google/flan-t5-base")
-
-def interview_assistant(prompt):
-    result = generator(prompt, max_length=200)[0]["generated_text"]
-    return result.strip()
-
-sample_prompts = [
-    "Ask me a Python question for a junior developer.",
-    "Rate this answer: I used a dictionary to store key-value pairs.",
-    "Give feedback on: I resolved a team conflict by listening to both sides."
-]
+from assistant_logic import get_interview_answer
 
 demo = gr.Interface(
-    fn=interview_assistant,
-    inputs=gr.Dropdown(choices=sample_prompts, label="Choose a sample prompt or type your own"),
+    fn=get_interview_answer,
+    inputs=gr.Textbox(lines=2, label="Ask your interview question"),
     outputs="text",
     title="🧠 Smart Interview Assistant",
-    description="Powered by Flan-T5. Practice interview questions or get feedback on your answers."
+    description="Ask for interview questions, answers, or explanations. Powered by RAG + LLM API."
 )
 
 demo.launch()
