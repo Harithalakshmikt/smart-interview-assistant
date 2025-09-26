@@ -1,9 +1,5 @@
 fastapi
 uvicorn[standard]
-langchain
-faiss-cpu
 python-dotenv
-torch
-transformers
 gradio
 requests
